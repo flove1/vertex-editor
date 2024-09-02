@@ -17,7 +17,6 @@ export class User {
   @Column()
   passwordHash: string;
 
-  @Column()
   @Column({ default: false })
   isActivated: boolean;
 }

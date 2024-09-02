@@ -1,11 +1,12 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compareSync } from 'bcrypt';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
-import { User } from '../entities/user.entity';
+import { User } from '../entity/user.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { formatErrorResponse } from '@common/helpers/response-utils';
 
 type AccessPayload = {
   userId: number;
@@ -38,13 +39,17 @@ export class AuthService {
         secret: this.configService.get('JWT_REFRESH_SECRET'),
       });
     } catch {
-      throw new UnauthorizedException();
+      throw new RpcException(
+        formatErrorResponse(HttpStatus.UNAUTHORIZED, 'Authentication failed')
+      );
     }
 
     const user = await this.userRepository.findOneBy({ id: payload.userId });
 
     if (!user) {
-      throw new Error('User not found');
+      throw new RpcException(
+        formatErrorResponse(HttpStatus.NOT_FOUND, 'User does not exist')
+      );
     }
 
     const accessPayload: AccessPayload = {
@@ -67,7 +72,9 @@ export class AuthService {
     const user = await this.userRepository.findOneBy({ username: username });
 
     if (!user || !compareSync(password, user.passwordHash)) {
-      return Promise.reject(new RpcException('Authentication failed'));
+      throw new RpcException(
+        formatErrorResponse(HttpStatus.UNAUTHORIZED, 'Authentication failed')
+      );
     }
 
     const accessPayload: AccessPayload = {

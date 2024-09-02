@@ -1,6 +1,7 @@
-import { Body, Controller } from '@nestjs/common';
+import { Body, Controller, HttpStatus } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { MessagePattern } from '@nestjs/microservices';
+import { formatResponse } from '@common/helpers/response-utils';
 
 @Controller()
 export class AuthController {
@@ -8,6 +9,8 @@ export class AuthController {
 
   @MessagePattern({ cmd: 'refresh' })
   async refresh(@Body() dto: { token: string }) {
-    return this.authService.refresh(dto.token);
+    const token = await this.authService.refresh(dto.token);
+
+    return formatResponse(HttpStatus.CREATED, 'Token refreshed', token);
   }
 }
