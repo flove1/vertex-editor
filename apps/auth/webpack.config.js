@@ -1,9 +1,15 @@
+const path = require("node:path")
 const { NxAppWebpackPlugin } = require('@nx/webpack/app-plugin');
-const { join } = require('path');
+
+const workspaceRoot = path.join(__dirname, "../..")
 
 module.exports = {
   output: {
-    path: join(__dirname, '../../dist/apps/auth'),
+    path: path.join(__dirname, '../../dist/apps/auth'),
+    devtoolModuleFilenameTemplate: (info) => { // ref: https://webpack.js.org/configuration/output/#outputdevtoolmodulefilenametemplate
+      const rel = path.relative(workspaceRoot, info.absoluteResourcePath)
+      return `webpack:///./${rel}`
+    }
   },
   plugins: [
     new NxAppWebpackPlugin({
@@ -14,6 +20,7 @@ module.exports = {
       optimization: false,
       outputHashing: 'none',
       generatePackageJson: true,
+      sourceMap: true
     }),
   ],
 };
