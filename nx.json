@@ -47,10 +47,7 @@
       "options": {
         "targetName": "test"
       },
-      "exclude": [
-        "apps/auth-e2e/**/*",
-        "apps/gateway-e2e/**/*"
-      ]
+      "exclude": ["apps/gateway-e2e/**/*"]
     },
     {
       "plugin": "@nx/webpack/plugin",
@@ -64,6 +61,11 @@
   "targetDefaults": {
     "e2e-ci--**/*": {
       "dependsOn": ["^build"]
+    },
+    "@nx/js:tsc": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     }
   },
   "generators": {

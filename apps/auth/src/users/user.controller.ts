@@ -7,13 +7,9 @@ import { MessagePattern, RpcException } from '@nestjs/microservices';
 import { AuthService } from '../auth/auth.service';
 import { User } from '../entity/user.entity';
 import { SignInDto } from './dto/sign-in.dto';
-import {
-  formatErrorResponse,
-  formatResponse,
-  formatValidationErrorResponse,
-} from '@common/helpers/response-utils';
 import { plainToInstance } from 'class-transformer';
 import { UserDto } from './dto/user.dto';
+import { formatErrorResponse, formatResponse, formatValidationErrorResponse } from '@vertex-editor/response';
 
 const saltRounds = 10;
 

@@ -1,12 +1,12 @@
 import { HttpStatus, ValidationError } from '@nestjs/common';
-import { StandardResponse } from '../dto/standard-response.dto';
+import { StandardResponse } from './standard-response.dto';
 
 export function formatResponse<T>(
   statusCode: HttpStatus,
   message: string,
   data?: T
 ): StandardResponse<T> {
-  return {
+  return  {
     statusCode,
     message,
     data,
@@ -37,7 +37,7 @@ export function formatValidationErrorResponse(
       return {
         property,
         value,
-        constraints: Object.values(constraints),
+        constraints: Object.values(constraints ?? []),
       };
     }),
   )

@@ -1,7 +1,7 @@
 import { Body, Controller, HttpStatus } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { MessagePattern } from '@nestjs/microservices';
-import { formatResponse } from '@common/helpers/response-utils';
+import { formatResponse } from '@vertex-editor/response';
 
 @Controller()
 export class AuthController {

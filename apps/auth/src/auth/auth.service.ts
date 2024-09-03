@@ -6,7 +6,7 @@ import { RpcException } from '@nestjs/microservices';
 import { User } from '../entity/user.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { formatErrorResponse } from '@common/helpers/response-utils';
+import { formatErrorResponse } from '@vertex-editor/response';
 
 type AccessPayload = {
   userId: number;

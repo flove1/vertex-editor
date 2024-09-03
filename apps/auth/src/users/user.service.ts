@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { validate } from 'class-validator';
 import { RpcException } from '@nestjs/microservices';
 import { User } from '../entity/user.entity';
-import { formatValidationErrorResponse } from '@common/helpers/response-utils';
+import { formatValidationErrorResponse } from '@';
 
 @Injectable()
 export class UserService {
