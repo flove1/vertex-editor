@@ -3,7 +3,7 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { validate } from 'class-validator';
 import { RpcException } from '@nestjs/microservices';
-import { User } from '../entity/user.entity';
+import { User } from '../entities/user.entity';
 import { formatValidationErrorResponse } from '@';
 
 @Injectable()

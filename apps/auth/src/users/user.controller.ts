@@ -5,7 +5,7 @@ import { SignUpRequestDto } from './dto/sign-up.dto';
 import * as bcrypt from 'bcrypt';
 import { MessagePattern, RpcException } from '@nestjs/microservices';
 import { AuthService } from '../auth/auth.service';
-import { User } from '../entity/user.entity';
+import { User } from '../entities/user.entity';
 import { SignInDto } from './dto/sign-in.dto';
 import { plainToInstance } from 'class-transformer';
 import { UserDto } from './dto/user.dto';

@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { compareSync } from 'bcrypt';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
-import { User } from '../entity/user.entity';
+import { User } from '../entities/user.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { formatErrorResponse } from '@vertex-editor/response';
